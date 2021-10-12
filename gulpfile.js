@@ -47,7 +47,7 @@ function copy_fonts() {
 // function javascripts
 function javascripts() {
   return gulp
-    .src('src/assets/js/**/*.js')
+    .src('src/assets/js/*.js')
     .pipe(rename({ suffix: ".min" }))
     .pipe(uglify())
     .pipe(gulp.dest(config.built + '/assets/js'))
