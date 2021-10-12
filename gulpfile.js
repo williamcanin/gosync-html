@@ -8,6 +8,7 @@ let mincss = require('gulp-csso');
 let gulp_clean = require('gulp-clean');
 let rename = require('gulp-rename');
 let plumber = require('gulp-plumber');
+let htmlmin = require('gulp-htmlmin');
 let browserSync = require('browser-sync').create();
 
 // load configurations.
@@ -24,7 +25,7 @@ function clean_build() {
 // function copy to root files statics
 function copy_to_root() {
   return gulp
-    .src(['src/CNAME', 'src/robots.txt', 'src/templates/**/*.html'])
+    .src(['src/CNAME', 'src/robots.txt'])
     .pipe(gulp.dest(config.built + '/'))
 }
 
@@ -91,6 +92,14 @@ function framework_jquery() {
     .pipe(gulp.dest(config.built + '/assets/vendor/jquery'))
 }
 
+// function minity all html
+function html_minify() {
+	return gulp
+		.src('src/templates/**/*.html')
+		.pipe(htmlmin({ collapseWhitespace: true }))
+		.pipe(gulp.dest(config.built + '/'));
+}
+
 // browser-sync
 function browserSync_reload(done) {
   browserSync.reload();
@@ -115,6 +124,7 @@ const vendor = gulp.series(
 // task build
 const build = gulp.series(
 	gulp.parallel(
+		html_minify,
 		copy_to_root,
 		copy_fonts,
 		copy_images,
@@ -126,6 +136,7 @@ const build = gulp.series(
 // task watch changed
 const watch = () => gulp.watch(
 	config.watch, gulp.series(
+		html_minify,
 		copy_to_root,
 		copy_images,
 		copy_fonts,
@@ -137,6 +148,7 @@ const watch = () => gulp.watch(
 // start the server
 const serve = gulp.series(
 	gulp.parallel(
+		html_minify,
 		copy_to_root,
 		copy_fonts,
 		copy_images,
@@ -150,6 +162,7 @@ const serve = gulp.series(
 // export tasks
 exports.clean = clean_build;
 exports.common = copy_to_root;
+exports.htmlminify = html_minify;
 exports.images = copy_images;
 exports.styles = styles;
 exports.js = javascripts;
