@@ -5,12 +5,14 @@
   "main": "gulpfile.js",
   "scripts": {
     "postinstall": "$(npm bin)/gulp build",
-    "server": "$(npm bin)/gulp serve"
+    "server": "$(npm bin)/gulp serve",
+    "build": "$(npm bin)/gulp build"
   },
   "keywords": [
     "skeleton",
     "boilerplate",
-    "template"
+    "template",
+    "html"
   ],
   "repository": {
     "type": "git",
