@@ -1,6 +1,6 @@
 {
     "built": "public",
-    "html-min": false,
+    "htmlmin": true,
     "server":{
       "port": "3010"
     },

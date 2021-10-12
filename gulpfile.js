@@ -9,6 +9,7 @@ let gulp_clean = require('gulp-clean');
 let rename = require('gulp-rename');
 let plumber = require('gulp-plumber');
 let htmlmin = require('gulp-htmlmin');
+let gulpif = require('gulp-if');
 let browserSync = require('browser-sync').create();
 
 // load configurations.
@@ -96,8 +97,8 @@ function framework_jquery() {
 function html_minify() {
 	return gulp
 		.src('src/templates/**/*.html')
-		.pipe(htmlmin({ collapseWhitespace: true }))
-		.pipe(gulp.dest(config.built + '/'));
+		.pipe(gulpif(config.htmlmin, htmlmin({ collapseWhitespace: true })))
+		.pipe(gulp.dest(config.built + '/'))
 }
 
 // browser-sync
