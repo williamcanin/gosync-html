@@ -23,7 +23,7 @@
     "node_modules"
   ],
   "author": "William C. Canin",
-  "license": "https://opensource.org/licenses/MIT",
+  "license": "https://github.com/williamcanin/gosync-html/blob/main/LICENSE",
   "devDependencies": {
     "browser-sync": "^2.27.5",
     "gulp": "^4.0.2",
