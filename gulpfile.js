@@ -35,6 +35,13 @@ function copy_images() {
     .pipe(gulp.dest(config.built + '/assets/images/'))
 }
 
+// function fonts images
+function copy_fonts() {
+  return gulp
+    .src(['src/assets/fonts/**/*'])
+    .pipe(gulp.dest(config.built + '/assets/fonts/'))
+}
+
 // function javascripts
 function javascripts() {
   return gulp
@@ -106,25 +113,39 @@ const vendor = gulp.series(
 )
 
 // task build
-const build = gulp.series(gulp.parallel(copy_to_root,
-																				copy_images,
-                    										styles,
-                    										javascripts,
-                    										vendor));
+const build = gulp.series(
+	gulp.parallel(
+		copy_to_root,
+		copy_fonts,
+		copy_images,
+    styles,
+    javascripts,
+    vendor
+));
 
 // task watch changed
-const watch = () => gulp.watch(config.watch, gulp.series(copy_to_root,copy_images,
-                                							   			   styles,
-                                							   			   javascripts,
-							   	                                       browserSync_reload));
+const watch = () => gulp.watch(
+	config.watch, gulp.series(
+		copy_to_root,
+		copy_images,
+		copy_fonts,
+		styles,
+    javascripts,
+		browserSync_reload
+));
 
 // start the server
-const serve = gulp.series(gulp.parallel(copy_to_root,copy_images,
-                    										styles,
-                    										javascripts,
-                    										vendor,
-	                                      browserSync_server,
-	                                      watch));
+const serve = gulp.series(
+	gulp.parallel(
+		copy_to_root,
+		copy_fonts,
+		copy_images,
+    styles,
+    javascripts,
+    vendor,
+	  browserSync_server,
+	  watch
+));
 
 // export tasks
 exports.clean = clean_build;

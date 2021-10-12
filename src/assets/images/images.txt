@@ -1,0 +1,2 @@
+You must place your images in this directory.
+No problem if you have it in other directories.

@@ -6,7 +6,8 @@
   "scripts": {
     "postinstall": "$(npm bin)/gulp build",
     "server": "$(npm bin)/gulp serve",
-    "build": "$(npm bin)/gulp build"
+    "build": "$(npm bin)/gulp build",
+    "clean": "$(npm bin)/gulp clean"
   },
   "keywords": [
     "skeleton",

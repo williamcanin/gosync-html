@@ -1,0 +1,2 @@
+You must put your fonts in this directory.
+No problem if you have it in other directories.
