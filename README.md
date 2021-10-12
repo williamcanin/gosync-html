@@ -1,4 +1,4 @@
-[Read in English](https://github.com/williamcanin/gosync-html/blob/master/README_en.md)
+[Read in English](https://github.com/williamcanin/gosync-html/blob/master/README-en.md)
 
 # Go!Sync HTML
 
