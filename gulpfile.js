@@ -21,17 +21,24 @@ function clean_build() {
     .pipe(gulp_clean({force: true}))
 }
 
-// function copy files statics
-function copy_common() {
+// function copy to root files statics
+function copy_to_root() {
   return gulp
-    .src(['src/common/**/*', 'src/**/*.html'])
+    .src(['src/CNAME', 'src/robots.txt', 'src/templates/**/*.html'])
     .pipe(gulp.dest(config.built + '/'))
+}
+
+// function copy images
+function copy_images() {
+  return gulp
+    .src(['src/assets/images/**/*'])
+    .pipe(gulp.dest(config.built + '/assets/images/'))
 }
 
 // function javascripts
 function javascripts() {
   return gulp
-    .src('src/js/**/*.js')
+    .src('src/assets/js/**/*.js')
     .pipe(rename({ suffix: ".min" }))
     .pipe(uglify())
     .pipe(gulp.dest(config.built + '/assets/js'))
@@ -40,7 +47,7 @@ function javascripts() {
 // function styles
 function styles() {
   return gulp
-    .src('src/scss/style.scss')
+    .src('src/assets/scss/style.scss')
     .pipe(plumber())
     .pipe(sass())
     .pipe(mincss())
@@ -99,19 +106,20 @@ const vendor = gulp.series(
 )
 
 // task build
-const build = gulp.series(gulp.parallel(copy_common,
+const build = gulp.series(gulp.parallel(copy_to_root,
+																				copy_images,
                     										styles,
                     										javascripts,
                     										vendor));
 
 // task watch changed
-const watch = () => gulp.watch(config.watch, gulp.series(copy_common,
+const watch = () => gulp.watch(config.watch, gulp.series(copy_to_root,copy_images,
                                 							   			   styles,
                                 							   			   javascripts,
 							   	                                       browserSync_reload));
 
 // start the server
-const serve = gulp.series(gulp.parallel(copy_common,
+const serve = gulp.series(gulp.parallel(copy_to_root,copy_images,
                     										styles,
                     										javascripts,
                     										vendor,
@@ -120,7 +128,8 @@ const serve = gulp.series(gulp.parallel(copy_common,
 
 // export tasks
 exports.clean = clean_build;
-exports.common = copy_common;
+exports.common = copy_to_root;
+exports.images = copy_images;
 exports.styles = styles;
 exports.js = javascripts;
 exports.bootstrap_styles = bootstrap_styles;

@@ -6,9 +6,8 @@
       "port": "3010"
     },
     "watch": [
-      "src/common/**/*",
-      "src/scss/**/*.scss",
-      "src/js/*.js",
-      "src/**/*.html"
+      "src/templates/**/*.html",
+      "src/assets/scss/**/*.scss",
+      "src/assets/js/**/*.js"
   ]
 }
